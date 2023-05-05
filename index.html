@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype pollution by pulsarpoint</title>
+</head>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    h1 {
+        text-align: center;
+    }
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    textarea {
+        width: 400px;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+    }
+    button {
+        width: 100px;
+        height: 50px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    pre {
+        width: 400px;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        overflow: scroll;
+    }
+    footer {
+        text-align: center;
+    }
+    footer a {
+        text-decoration: none;
+        color: #000;
+    }
+    .json_object {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body>
+    <h1>Prototype pollution by pulsarpoint</h1>
+    <div>
+        <div class="json_object">
+            <label for="destination">Destination object</label>
+            <textarea id="dst" name="destination">
+            </textarea>
+        </div>
+        <div class="json_object">
+            <label for="source">Source object</label>
+            <textarea id="src" name="source">
+            </textarea>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h3>Merged object</h3>
+            <pre id="merged_object"> </pre>
+        </div>
+    </div>
+    <div>
+        <button id="btn">Submit</button>
+    </div>
+</body>
+<footer>
+    <p>Prototype pollution by <a href="https://pulsarpoint.rs">pulsarpoint</a></p>
+</footer>
+</html>
+<script>
+
+    let defaults = {
+        analytics_script: 'cdn_url_for_analytics_script'
+    }
+    
+    function mergeObjects(dst, src) {
+        for (key in src) {
+            if (!(key in dst)) {
+                dst[key]= {};
+            }
+            if (src[key] instanceof Object) {
+                mergeObjects(dst[key], src[key]);
+            } else {
+               dst[key] = src[key];
+            }
+        }
+        return dst;
+    }
+
+    var btn = document.getElementById('btn');
+   
+    btn.addEventListener('click', function(){
+        let config = {};
+        var dst = document.getElementById('dst').value;
+        var src = document.getElementById('src').value;
+        var dstObj = JSON.parse(dst);
+        var srcObj = JSON.parse(src);
+        dstObject = mergeObjects(dstObj, srcObj);
+        document.getElementById('merged_object').innerHTML = JSON.stringify(dstObject, null, 2);
+        console.log("ovde? ??");
+        console.log("config.analytics_script ", config.analytics_script);
+        let analytics_script = config.analytics_script || defaults.analytics_script
+        let script = document.createElement('script');
+        console.log("this is script ", script);
+        script.src= analytics_script;
+        document.body.appendChild(script);
+    });
+</script>
