@@ -114,11 +114,8 @@
         var srcObj = JSON.parse(src);
         dstObject = mergeObjects(dstObj, srcObj);
         document.getElementById('merged_object').innerHTML = JSON.stringify(dstObject, null, 2);
-        console.log("ovde? ??");
-        console.log("config.analytics_script ", config.analytics_script);
         let analytics_script = config.analytics_script || defaults.analytics_script
         let script = document.createElement('script');
-        console.log("this is script ", script);
         script.src= analytics_script;
         document.body.appendChild(script);
     });
