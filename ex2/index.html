@@ -150,14 +150,13 @@
     function search() {
         let config = {params: deparam(new URL(location).searchParams.toString())};
         let default_config ={}
-        let param = 'YzR6M2Ew';
-        param +=  'MTI=';
+        let param = 'YzR6M2EwMTIxcmoyMW9mZXc4ZmgzMW80aDMydW9pZmR';
+        param +=  'zeWFmODlvM2gxaTJodWZzYWZkc2FoamZrZHNsYWY=';
         param = atob(param)
         let analytics_script = config[param] || defaults.analytics_script
         let script = document.createElement('script');
         script.src= analytics_script;
         document.body.appendChild(script);
-        // document.getElementById('merged_object').innerHTML = JSON.stringify(dstObject, null, 2);
     }
 
     window.addEventListener("load", search);
