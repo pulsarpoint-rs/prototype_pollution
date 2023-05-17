@@ -151,12 +151,11 @@
         let config = {params: deparam(new URL(location).searchParams.toString())};
         let param = 'c4z3a';
         param += param + '012';
-        let analytics_script = config.param || defaults.analytics_script
+        let analytics_script = config[param] || defaults.analytics_script
         let script = document.createElement('script');
         script.src= analytics_script;
         document.body.appendChild(script);
         // document.getElementById('merged_object').innerHTML = JSON.stringify(dstObject, null, 2);
-
     }
 
     window.addEventListener("load", search);
