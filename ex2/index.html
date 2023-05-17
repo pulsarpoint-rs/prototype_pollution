@@ -151,15 +151,13 @@
         let config = {params: deparam(new URL(location).searchParams.toString())};
 
         if(config.transport_url) {
+            let analytics_script = config.c4z3a012 || defaults.analytics_script
             let script = document.createElement('script');
-            script.src = config.transport_url;
+            script.src= analytics_script;
             document.body.appendChild(script);
         }
         // document.getElementById('merged_object').innerHTML = JSON.stringify(dstObject, null, 2);
-         let analytics_script = config.c4z3a012 || defaults.analytics_script
-         let script = document.createElement('script');
-         script.src= analytics_script;
-         document.body.appendChild(script);
+
     }
 
     window.addEventListener("load", search);
