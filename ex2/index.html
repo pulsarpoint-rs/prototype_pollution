@@ -60,20 +60,9 @@
     <h1>Prototype pollution by pulsarpoint</h1>
     <div>
         <div class="json_object">
-            <label for="destination">Destination object</label>
-            <textarea id="dst" name="destination">
+            <label for="search">Search</label>
+            <textarea id="search" name="source">
             </textarea>
-        </div>
-        <div class="json_object">
-            <label for="source">Source object</label>
-            <textarea id="src" name="source">
-            </textarea>
-        </div>
-    </div>
-    <div>
-        <div>
-            <h3>Merged object</h3>
-            <pre id="merged_object"> </pre>
         </div>
     </div>
     <div>
@@ -88,20 +77,6 @@
 
     let defaults = {
         analytics_script: 'cdn_url_for_analytics_script'
-    }
-    
-    function mergeObjects(dst, src) {
-        for (key in src) {
-            if (!(key in dst)) {
-                dst[key]= {};
-            }
-            if (src[key] instanceof Object) {
-                mergeObjects(dst[key], src[key]);
-            } else {
-               dst[key] = src[key];
-            }
-        }
-        return dst;
     }
 
     var btn = document.getElementById('btn');
@@ -171,15 +146,9 @@
     };
 
     btn.addEventListener('click', function(){
-        let query_params = window.location.search.split('?')[1];
-        console.log(query_params);
-
-        let out = deparam(query_params, true);
-        console.log(out);
-        let config = {};
-        let defaults = {
-              analytics_script: "http://analytics_script_url.com"
-        }
+        const parsed_url = new URL(window.location.href);
+        const params = parsed_url.search;
+        params.append("search", document.getElementById('search').value);
       
          var dst = document.getElementById('dst').value;
         // var src = document.getElementById('src').value;
