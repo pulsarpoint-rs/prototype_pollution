@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype pollution by pulsarpoint</title>
+</head>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    h1 {
+        text-align: center;
+    }
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    textarea {
+        width: 400px;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+    }
+    button {
+        width: 100px;
+        height: 50px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    pre {
+        width: 400px;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        overflow: scroll;
+    }
+    footer {
+        text-align: center;
+    }
+    footer a {
+        text-decoration: none;
+        color: #000;
+    }
+    .json_object {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body>
+    <h1>Prototype pollution by pulsarpoint</h1>
+    <div>
+        <div class="json_object">
+            <label for="destination">Destination object</label>
+            <textarea id="dst" name="destination">
+            </textarea>
+        </div>
+        <div class="json_object">
+            <label for="source">Source object</label>
+            <textarea id="src" name="source">
+            </textarea>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h3>Merged object</h3>
+            <pre id="merged_object"> </pre>
+        </div>
+    </div>
+    <div>
+        <button id="btn">Submit</button>
+    </div>
+</body>
+<footer>
+    <p>Prototype pollution by <a href="https://pulsarpoint.rs">pulsarpoint</a></p>
+</footer>
+</html>
+<script>
+
+    let defaults = {
+        analytics_script: 'cdn_url_for_analytics_script'
+    }
+    
+    function mergeObjects(dst, src) {
+        for (key in src) {
+            if (!(key in dst)) {
+                dst[key]= {};
+            }
+            if (src[key] instanceof Object) {
+                mergeObjects(dst[key], src[key]);
+            } else {
+               dst[key] = src[key];
+            }
+        }
+        return dst;
+    }
+
+    var btn = document.getElementById('btn');
+    var deparam = function( params, coerce ) {
+        var obj = {},
+            coerce_types = { 'true': !0, 'false': !1, 'null': null };
+    
+        if (!params) {
+            return obj;
+        }
+    
+        params.replace(/\+/g, ' ').split('&').forEach(function(v){
+            var param = v.split( '=' ),
+                key = decodeURIComponent( param[0] ),
+                val,
+                cur = obj,
+                i = 0,
+    
+                keys = key.split( '][' ),
+                keys_last = keys.length - 1;
+    
+            if ( /\[/.test( keys[0] ) && /\]$/.test( keys[ keys_last ] ) ) {
+                keys[ keys_last ] = keys[ keys_last ].replace( /\]$/, '' );
+                keys = keys.shift().split('[').concat( keys );
+                keys_last = keys.length - 1;
+            } else {
+                keys_last = 0;
+            }
+    
+            if ( param.length === 2 ) {
+                val = decodeURIComponent( param[1] );
+    
+                if ( coerce ) {
+                    val = val && !isNaN(val) && ((+val + '') === val) ? +val        // number
+                        : val === 'undefined'                       ? undefined         // undefined
+                            : coerce_types[val] !== undefined           ? coerce_types[val] // true, false, null
+                                : val;                                                          // string
+                }
+    
+                if ( keys_last ) {
+                    for ( ; i <= keys_last; i++ ) {
+                        key = keys[i] === '' ? cur.length : keys[i];
+                        cur = cur[key] = i < keys_last
+                            ? cur[key] || ( keys[i+1] && isNaN( keys[i+1] ) ? {} : [] )
+                            : val;
+                    }
+    
+                } else {
+                    if ( Object.prototype.toString.call( obj[key] ) === '[object Array]' ) {
+                        obj[key].push( val );
+    
+                    } else if ( {}.hasOwnProperty.call(obj, key) ) {
+                        obj[key] = [ obj[key], val ];
+                    } else {
+                        obj[key] = val;
+                    }
+                }
+    
+            } else if ( key ) {
+                obj[key] = coerce
+                    ? undefined
+                    : '';
+            }
+        });
+    
+        return obj;
+    };
+
+    btn.addEventListener('click', function(){
+        let query_params = window.location.search.split('?')[1];
+        console.log(query_params);
+
+        let out = deparam(query_params, true);
+        console.log(out);
+        let config = {};
+        let defaults = {
+              analytics_script: "http://analytics_script_url.com"
+        }
+      
+         var dst = document.getElementById('dst').value;
+        // var src = document.getElementById('src').value;
+         var dstObj = JSON.parse(dst);
+        // var srcObj = JSON.parse(src);
+        // dstObject = mergeObjects(dstObj, srcObj);
+        // document.getElementById('merged_object').innerHTML = JSON.stringify(dstObject, null, 2);
+         let analytics_script = config.c4z3a012 || defaults.analytics_script
+         let script = document.createElement('script');
+         script.src= analytics_script;
+         document.body.appendChild(script);
+    })
+      
+</script>
