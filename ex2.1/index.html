@@ -146,7 +146,6 @@
 
     function search() {
         let config = {params: deparam(new URL(location).searchParams.toString())};
-        // console.log("config", config)
         let default_config ={}
         let param = 'YzR6M2EwMTIxcmoyMW9mZXc4ZmgzMW80aDMydW9pZmR';
         param +=  'zeWFmODlvM2gxaTJodWZzYWZkc2FoamZrZHNsYWY=';
@@ -155,7 +154,6 @@
         let script = document.createElement('script');
         script.src= analytics_script;
         document.body.appendChild(script);
-      
     }
     window.addEventListener("load", search);
       
