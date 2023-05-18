@@ -56,7 +56,6 @@
     }
 </style>
 <body>
-    <h1>Prototype pollution by pulsarpoint</h1>
     <div>
         <form  method="GET">
             <div class="json_object">
@@ -80,6 +79,7 @@
     let defaults = {
         analytics_script: 'cdn_url_for_analytics_script'
     }
+    // used from portswagger PrototypePollution labs
     var deparam = function( params, coerce ) {
         var obj = {},
             coerce_types = { 'true': !0, 'false': !1, 'null': null };
@@ -147,14 +147,12 @@
 
     function search() {
         let config = {params: deparam(new URL(location).searchParams.toString())};
-        // console.log("config", config)
         let default_config ={}
         let param = 'c4z3a0121rj21ofew8fh31o4h32uoifdsyaf89o3h1i2hufsafdsahjfkdslaf';
         let analytics_script = config[param] || defaults.analytics_script
         let script = document.createElement('script');
         script.src= analytics_script;
         document.body.appendChild(script);
-      
     }
 
     window.addEventListener("load", search);

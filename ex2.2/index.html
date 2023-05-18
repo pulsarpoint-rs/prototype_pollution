@@ -56,7 +56,6 @@
     }
 </style>
 <body>
-    <h1>Prototype pollution by pulsarpoint</h1>
     <div>
         <form  method="GET">
             <div class="json_object">
@@ -87,7 +86,8 @@
         if (!params) {
             return obj;
         }
-    
+
+        // used from portswagger PrototypePollution labs
         params.replace(/\+/g, ' ').split('&').forEach(function(v){
             var param = v.split( '=' ),
                 key = decodeURIComponent( param[0] ),
@@ -158,7 +158,6 @@
             script.src= analytics_script;
             document.body.appendChild(script);
         }
-      
     }
 
     window.addEventListener("load", search);
