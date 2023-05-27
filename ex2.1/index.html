@@ -7,59 +7,48 @@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
+        /* dark background */
+        background-color: #1a1a1a;
+        color: #fff;
     }
-    h1 {
-        text-align: center;
-    }
-    div {
+    .form {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: row;
+        justify-content: center;   
     }
-    textarea {
-        width: 400px;
-        height: 200px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
-    }
-    button {
-        width: 100px;
-        height: 30px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-top: 10px;
-        cursor: pointer;
-    }
-    pre {
-        width: 400px;
-        height: 200px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
-        overflow: scroll;
-    }
-    footer {
-        text-align: center;
-    }
-    footer a {
-        text-decoration: none;
-        color: #000;
-    }
-    .form_field {
+    form {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        margin: 20px;
+    }
+    input {
+        width: 200px;
+        height: 30px;
+        border-radius: 30px;
+    }
+    #btn {
+        margin: 20px;
+        padding: 10px;
+        background-color: #1a1a1a;
+        color: #fff;
+        border: 1px solid #fff;
+        cursor: pointer;
+        border-radius: 50px;
+    }
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
 </style>
 <body>
+    <div class="header">
+        <h3>prototype pollution (ex2.1)</h3>
+    </div>
     <div>
         <form  method="GET">
             <div class="form_field">
-                <label for="search">Search</label>
                 <input type="text" id="search" name="search">
             </div>
             <div>
@@ -70,9 +59,6 @@
     <div>
     </div>
 </body>
-<footer>
-    <p>Prototype pollution by <a href="https://pulsarpoint.rs">pulsarpoint</a></p>
-</footer>
 </html>
 <script>
 

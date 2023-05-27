@@ -7,82 +7,98 @@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
+        /* dark background */
+        background-color: #1a1a1a;
+        color: #fff;
     }
     h3 {
         text-align: center;
     }
-    div {
+    .output {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: row;
+        justify-content: center;   
     }
-    textarea {
-        width: 400px;
-        height: 200px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
-    }
-    button {
-        width: 100px;
-        height: 50px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
-        cursor: pointer;
-    }
-    pre {
-        width: 400px;
-        height: 200px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
-        overflow: scroll;
-    }
-    footer {
-        text-align: center;
-    }
-    footer a {
-        text-decoration: none;
-        color: #000;
-    }
-    .json_object {
+    .output > div {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        margin: 20px;
+    }
+    .output > div > textarea {
+        width: 600px;
+    }
+    .merge_button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .merge_button > button {
+        margin: 20px;
+        padding: 10px;
+        background-color: #1a1a1a;
+        color: #fff;
+        border: 1px solid #fff;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .input {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .input > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .input > div > textarea {
+        border-radius: 10px;
+        font-size: larger;
+        width: 100%;
+    }   
+    .json_object {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        /* nice color that matches the background */
+    }
+    /* nice color for textarea */
+    textarea {
+        border-radius: 30px;
+        margin-top: 20px;
+        background-color: #1a1a1a;
+        color: #fff;
+        border: 1px solid #fff;
+        padding: 10px;
+        height: 300px;
     }
 </style>
 <body>
-    <h3>Prototype pollution by pulsarpoint</h3>
-    <div>
+    <h3>Prototype pollution (ex1)</h3>
+
+    <div class="input">
         <div class="json_object">
             <label for="destination">Destination object</label>
-            <textarea id="dst" name="destination">
-            </textarea>
+            <textarea id="dst" name="destination"> </textarea>
         </div>
         <div class="json_object">
             <label for="source">Source object</label>
-            <textarea id="src" name="source">
-            </textarea>
+            <textarea id="src" name="source"> </textarea>
         </div>
     </div>
-    <div>
+    <div class="merge_button">
+        <div> </div><button id="btn">Merge</button> </div>
+    </div>
+    <div class="output">
         <div>
             <h3>Merged object</h3>
-            <pre id="merged_object"> </pre>
+            <textarea id="merged_object"> </textarea>
         </div>
     </div>
-    <div>
-        <button id="btn">Submit</button>
-    </div>
+    
 </body>
-<footer>
-    <p>Prototype pollution by <a href="https://pulsarpoint.rs">pulsarpoint</a></p>
-</footer>
 </html>
 <script>
 
